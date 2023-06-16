@@ -261,56 +261,65 @@ namespace PerorosamaFukuwarai.ViewModels
             nowPeroroImageNum++;
             if(nowPeroroImageNum == compositionArray.Length)
             {
-                ShowCompleteImage();
-                return;
-            }
-            else if(nowPeroroImageNum == compositionArray.Length +1)
-            {
                 CreatePeroroImage(PeroroFileManager.OpenFolderDialog(), peroroCanvas);
                 return;
             }
+
             switch (compositionArray[nowPeroroImageNum])
             {
-                
                 case "EyeR":
                     peroroComposition.EyeRPosition = mousepos;
-                    path = peroroComposition.EyeR;
+                    path = peroroComposition.EyeL;
                     break;
                 case "EyeL":
                     peroroComposition.EyeLPosition = mousepos;
-                    path = peroroComposition.EyeL;
+                    path = peroroComposition.CheekR;
                     break;
                 case "CheekR":
                     peroroComposition.CheekRPosition = mousepos;
-                    path = peroroComposition.CheekR;
+                    path = peroroComposition.CheekL;
                     break;
                 case "CheekL":
                     peroroComposition.CheekLPosition = mousepos;
-                    path = peroroComposition.CheekL;
+                    path = peroroComposition.Mouth;
                     break;
                 case "Mouth":
                     peroroComposition.MouthPosition = mousepos;
-                    path = peroroComposition.Mouth;
+                    path = peroroComposition.Tongue;
                     break;
                 case "Tongue":
                     peroroComposition.TonguePosition = mousepos;
-                    path = peroroComposition.Tongue;
+                    path = null;
+                    ShowCompleteImage();
                     break;
                 default:
-                    
                     break;
                 
             }
             if(path == null)
             {
-                PeroroFileManager.ReturnBitmapImageResource("transparentImage.png");
+                image.Source = PeroroFileManager.ReturnBitmapImageResource("transparentImage.png");
+                return;
             }
+            
             image.Source = PeroroFileManager.ReturnBitmapImage(path);
         }
 
         private void ShowCompleteImage()
         {
+            peroroEyeRImage.Visibility = Visibility.Visible;
+            peroroEyeLImage.Visibility = Visibility.Visible;
+            peroroCheekRImage.Visibility = Visibility.Visible;
+            peroroCheekLImage.Visibility = Visibility.Visible;
+            peroroMouthImage.Visibility = Visibility.Visible;
+            peroroTongueImage.Visibility = Visibility.Visible;
 
+            PeroroEyeR = peroroComposition.EyeRPosition;
+            PeroroEyeL = peroroComposition.EyeLPosition;
+            PeroroCheekR = peroroComposition.CheekRPosition;
+            PeroroCheekL = peroroComposition.CheekLPosition;
+            PeroroMouth = peroroComposition.MouthPosition;
+            PeroroTongue = peroroComposition.TonguePosition;
         }
 
     }
