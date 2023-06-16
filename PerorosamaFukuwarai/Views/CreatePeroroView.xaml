@@ -109,13 +109,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            
+
         </Canvas>
-        <Grid Grid.Row="1">
-            <Canvas>
-                <Button Content="Button" Height="20" Width="100" VerticalAlignment="Top" 
-                       Click="ClickCreatePeroroImage"/>
-            </Canvas>
-        </Grid>
     </Grid>
 </UserControl>

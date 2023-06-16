@@ -263,6 +263,11 @@ namespace PerorosamaFukuwarai.ViewModels
                 CreatePeroroImage(PeroroFileManager.OpenFolderDialog(), peroroCanvas);
                 return;
             }
+            if (nowPeroroImageNum >= compositionArray.Length)
+            {
+                
+                return;
+            }
 
             switch (compositionArray[nowPeroroImageNum])
             {

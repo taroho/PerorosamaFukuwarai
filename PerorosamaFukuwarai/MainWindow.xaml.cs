@@ -27,5 +27,17 @@ namespace PerorosamaFukuwarai
             InitializeComponent();
             DataContext = new MainWindowViewModel();
         }
+
+        private MainWindowViewModel VM => (MainWindowViewModel) DataContext;
+
+        private void ClickFukuwaraiButton(object sender, RoutedEventArgs e)
+        {
+            VM.GoFukuwaraiPeroroView();
+        }
+
+        private void ClickCreateButton(object sender, RoutedEventArgs e)
+        {
+            VM.GoCreatePeroroView();
+        }
     }
 }

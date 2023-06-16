@@ -43,12 +43,6 @@ namespace PerorosamaFukuwarai.Views
 
         private CreatePeroroViewModel VM => (CreatePeroroViewModel)DataContext;
 
-        private void ClickCreatePeroroImage(object sender, RoutedEventArgs e)
-        {
-            VM.CreatePeroroImage( PeroroFileManager.OpenFolderDialog(), peroroCanvas);
-        }
-       
-
         private void GetMouseClickPositon(object sender, MouseButtonEventArgs e) 
         {
             VM.NextStepPeroro(e.GetPosition(this), nextImage);

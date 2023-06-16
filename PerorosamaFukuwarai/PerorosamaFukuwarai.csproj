@@ -65,9 +65,13 @@
     </ApplicationDefinition>
     <Compile Include="PeroroManager\PeroroComposition.cs" />
     <Compile Include="PeroroManager\PeroroFileManager.cs" />
+    <Compile Include="ViewModels\CreateFreePeroroViewModel.cs" />
     <Compile Include="ViewModels\CreatePeroroViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\CreateFreePeroroView.xaml.cs">
+      <DependentUpon>CreateFreePeroroView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CreatePeroroView.xaml.cs">
       <DependentUpon>CreatePeroroView.xaml</DependentUpon>
     </Compile>
@@ -83,6 +87,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CreateFreePeroroView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CreatePeroroView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

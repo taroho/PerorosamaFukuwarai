@@ -12,8 +12,8 @@ namespace PerorosamaFukuwarai.ViewModels
         public MainWindowViewModel()
         {
             CreatePeroroViewModel createPeroroViewModel = new CreatePeroroViewModel();
-            
             ActiveView = createPeroroViewModel;
+            Debug.Print(ActiveView.ToString());
         }
 
         
@@ -26,6 +26,16 @@ namespace PerorosamaFukuwarai.ViewModels
                 activeView = value;
                 RaisePropertyChanged(nameof(ActiveView));
             }
+        }
+
+        public void GoCreatePeroroView()
+        {
+            ActiveView = new CreateFreePeroroViewModel();
+        }
+
+        public void GoFukuwaraiPeroroView() 
+        {
+            ActiveView = new CreatePeroroViewModel();
         }
     }
 }
