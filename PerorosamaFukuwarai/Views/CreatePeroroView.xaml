@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="PerorosamaFukuwarai.Views.CreatePeroroView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PerorosamaFukuwarai.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400"
+             >
+    <Grid Width="400" Height="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0" Width="400" Height="400" x:Name="peroroCanvas" MouseDown="GetMouseClickPositon" Mouse.MouseMove="GetMouseMovePotison">
+            <Image 
+            Source="{Binding BodyImage}"
+            Width="400"
+            Height="400"></Image>
+            <Image 
+                x:Name="PeroroEyeRImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+            Visibility="Hidden"
+            Source="{Binding EyeRImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroEyeR.X}"
+                                        Y="{Binding PeroroEyeR.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image 
+                x:Name="PeroroEyeLImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden"
+            Source="{Binding EyeLImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroEyeL.X}"
+                                        Y="{Binding PeroroEyeL.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image 
+                x:Name="PeroroCheekRImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden"
+            Source="{Binding CheekRImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroCheekR.X}"
+                                        Y="{Binding PeroroCheekR.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image 
+                x:Name="PeroroCheekLImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden"
+            Source="{Binding CheekLImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroCheekL.X}"
+                                        Y="{Binding PeroroCheekL.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image 
+                x:Name="PeroroMouthImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden"
+            Source="{Binding MouthImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroMouth.X}"
+                                        Y="{Binding PeroroMouth.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image 
+                x:Name="PeroroTongueImage"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Visibility="Hidden"
+            Source="{Binding TongueImage}"
+            Width="400"
+            Height="400">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroTongue.X}"
+                                        Y="{Binding PeroroTongue.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="nextImage" Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="{Binding PeroroNext.X}"
+                                        Y="{Binding PeroroNext.Y}"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            
+        </Canvas>
+        <Grid Grid.Row="1">
+            <Canvas>
+                <Button Content="Button" Height="20" Width="100" VerticalAlignment="Top" 
+                       Click="ClickCreatePeroroImage"/>
+            </Canvas>
+        </Grid>
+    </Grid>
+</UserControl>
