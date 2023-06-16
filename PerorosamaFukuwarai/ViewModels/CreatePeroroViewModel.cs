@@ -217,7 +217,6 @@ namespace PerorosamaFukuwarai.ViewModels
         }
 
         
-
         public void CreatePeroroImage(string path, Canvas canvas)
         {
             if(path==null)
