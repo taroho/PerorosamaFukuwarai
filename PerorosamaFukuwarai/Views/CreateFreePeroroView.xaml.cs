@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PerorosamaFukuwarai.PeroroManager;
+using PerorosamaFukuwarai.ViewModels;
 
 namespace PerorosamaFukuwarai.Views
 {
@@ -23,6 +25,28 @@ namespace PerorosamaFukuwarai.Views
         public CreateFreePeroroView()
         {
             InitializeComponent();
+            DataContext = new CreateFreePeroroViewModel();
+
+            nextImage.Source = PeroroFileManager.ReturnBitmapImage("Peroro/EyeR/peroroeyeR.png");
+            VM.peroroCanvas = peroroCanvas;
+            VM.peroroEyeRImage = PeroroEyeRImage;
+            VM.peroroEyeLImage = PeroroEyeLImage;
+            VM.peroroCheekRImage = PeroroCheekRImage;
+            VM.peroroCheekLImage = PeroroCheekLImage;
+            VM.peroroMouthImage = PeroroMouthImage;
+            VM.peroroTongueImage = PeroroTongueImage;
+        }
+
+        private CreateFreePeroroViewModel VM => (CreateFreePeroroViewModel)DataContext;
+
+        private void GetMouseClickPositon(object sender, MouseButtonEventArgs e)
+        {
+            VM.NextStepPeroro(e.GetPosition(this), nextImage);
+        }
+
+        private void GetMouseMovePotison(object sender, MouseEventArgs e)
+        {
+            VM.FollowMousePeroroImage(e.GetPosition(this));
         }
     }
 }
