@@ -37,5 +37,7 @@ namespace PerorosamaFukuwarai.ViewModels
         {
             ActiveView = new CreatePeroroViewModel();
         }
+
+       
     }
 }
