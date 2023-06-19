@@ -189,5 +189,8 @@
   <ItemGroup>
     <Resource Include="perorobody.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\transparentImage.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

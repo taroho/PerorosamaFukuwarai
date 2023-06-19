@@ -28,9 +28,8 @@ namespace PerorosamaFukuwarai.ViewModels
 
         public CreateFreePeroroViewModel()
         {
+           
             nowPeroroImageNum = 0;
-
-
             BodyImage = peroroComposition.Body;
             EyeRImage = peroroComposition.EyeR;
             EyeLImage = peroroComposition.EyeL;
@@ -46,10 +45,6 @@ namespace PerorosamaFukuwarai.ViewModels
             PeroroCheekL = peroroComposition.CheekLPosition;
             PeroroMouth = peroroComposition.MouthPosition;
             PeroroTongue = peroroComposition.TonguePosition;
-
-            Debug.Print(BodyImage);
-
-
         }
 
         private string bodyImage;
