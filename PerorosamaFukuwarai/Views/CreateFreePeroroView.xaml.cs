@@ -27,8 +27,6 @@ namespace PerorosamaFukuwarai.Views
             InitializeComponent();
             DataContext = new CreateFreePeroroViewModel();
 
-            nextImage.Source = PeroroFileManager.ReturnBitmapImage("Peroro/EyeR/peroroeyeR.png");
-            VM.peroroCanvas = peroroCanvas;
             VM.peroroEyeRImage = PeroroEyeRImage;
             VM.peroroEyeLImage = PeroroEyeLImage;
             VM.peroroCheekRImage = PeroroCheekRImage;
