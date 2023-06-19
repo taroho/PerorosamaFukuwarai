@@ -265,7 +265,6 @@ namespace PerorosamaFukuwarai.ViewModels
             }
             if (nowPeroroImageNum >= compositionArray.Length)
             {
-                
                 return;
             }
 
