@@ -22,7 +22,6 @@ namespace PerorosamaFukuwarai.ViewModels
     {
         public PeroroComposition peroroComposition = new PeroroComposition();
         private int nowPeroroImageNum;
-        private int savePeroroImageNum;
         public Canvas CanvasPeroro;
 
         public Image ImagePeroroBody;
@@ -77,13 +76,18 @@ namespace PerorosamaFukuwarai.ViewModels
             ImagePeroroNext.RenderTransform = new TranslateTransform(mousepos.X, mousepos.Y);
         }
 
-        public void NextStepPeroro(Point mousepos, Image image)
+        public void NextStepPeroro(Point mousepos)
         {
-            //image.Source = PeroroFileManager.ReturnBitmapImage(path);
+            if(nowPeroroImageNum == 0)
+            {
+                ImagePeroroBody.Visibility = Visibility.Hidden;
+                ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum+1].GetPath());
+                return;
+            }
+
+            peroroComposition.PeroroPartsList[nowPeroroImageNum].SetPos(mousepos);
+            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+            nowPeroroImageNum++;
         }
-
-       
-        
-
     }
 }

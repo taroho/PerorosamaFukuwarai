@@ -52,7 +52,7 @@ namespace PerorosamaFukuwarai.PeroroManager
             SetPeroroComposition(this.PeroroPartsList);
         }
         
-        private int GetPeroroPartListCount()
+        public int GetPeroroPartListCount()
         {
             return PeroroPartsList.Count;
         }
