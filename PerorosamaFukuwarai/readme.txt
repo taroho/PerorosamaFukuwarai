@@ -28,7 +28,6 @@
 
 
 Mr. Peroro's laugh Production: taroho 
-(DeepL translation used)
 ____________________________________________
 How to play
 
