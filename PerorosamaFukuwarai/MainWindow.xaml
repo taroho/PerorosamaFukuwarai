@@ -32,13 +32,13 @@
                      Background="PaleVioletRed"
                     Margin="0,80,0,0" VerticalAlignment="Top" Height="100" Width="100"
                     Click="ClickFukuwaraiButton" >
-                <Image Source="/perorobody.png"></Image>
+                <Image x:Name="ButtonImage"></Image>
             </Button>
             <Button HorizontalAlignment="Center" 
                     Background="PaleVioletRed"
                     Margin="0,250,0,0" VerticalAlignment="Top" Height="100" Width="100"
                     Click="ClickCreateButton">
-                <Image Source="/peroroImageresources.png" ></Image>
+                <Image x:Name="ButtonFreeImage" ></Image>
             </Button>
         </Grid>
     </Grid>

@@ -31,7 +31,7 @@ namespace PerorosamaFukuwarai.Views
             InitializeComponent();
             DataContext = new CreatePeroroViewModel();
 
-            nextImage.Source = PeroroFileManager.ReturnBitmapImage(VM.peroroComposition.EyeR);
+            nextImage.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
             VM.peroroCanvas = peroroCanvas;
             VM.peroroEyeRImage = PeroroEyeRImage;
             VM.peroroEyeLImage = PeroroEyeLImage;
@@ -39,6 +39,7 @@ namespace PerorosamaFukuwarai.Views
             VM.peroroCheekLImage = PeroroCheekLImage;
             VM.peroroMouthImage = PeroroMouthImage;
             VM.peroroTongueImage = PeroroTongueImage;
+            VM.peroroBodyImage = PeroroBodyImage;
         }
 
         private CreatePeroroViewModel VM => (CreatePeroroViewModel)DataContext;

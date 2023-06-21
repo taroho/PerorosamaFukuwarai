@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai
 {
+    using PerorosamaFukuwarai.PeroroManager;
     using PerorosamaFukuwarai.ViewModels;
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
@@ -26,6 +27,9 @@ namespace PerorosamaFukuwarai
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+
+            ButtonImage.Source = PeroroFileManager.ReturnBitmapImageResource("perorobody.png");
+            ButtonFreeImage.Source = PeroroFileManager.ReturnBitmapImageResource("peroroImageresources.png");
         }
 
         private MainWindowViewModel VM => (MainWindowViewModel) DataContext;

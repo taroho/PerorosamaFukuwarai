@@ -24,6 +24,7 @@ namespace PerorosamaFukuwarai.ViewModels
         string[] compositionArray = PeroroComposition.CompositionArray;
         private int nowPeroroImageNum;
         public Canvas peroroCanvas;
+        public Image peroroBodyImage;
         public Image peroroEyeRImage;
         public Image peroroEyeLImage;
         public Image peroroCheekRImage;
@@ -257,7 +258,7 @@ namespace PerorosamaFukuwarai.ViewModels
         public void NextStepPeroro(Point mousepos, Image image)
         {
             string path = null;
-            nowPeroroImageNum++;
+            
             if(nowPeroroImageNum == compositionArray.Length)
             {
                 CreatePeroroImage(PeroroFileManager.OpenFolderDialog(), peroroCanvas);
@@ -270,6 +271,10 @@ namespace PerorosamaFukuwarai.ViewModels
 
             switch (compositionArray[nowPeroroImageNum])
             {
+                case "Body":
+                    peroroBodyImage.Source = PeroroFileManager.ReturnBitmapImageResource("transparentImage.png");
+                    path = peroroComposition.EyeR;
+                    break;
                 case "EyeR":
                     peroroComposition.EyeRPosition = mousepos;
                     path = peroroComposition.EyeL;
@@ -299,17 +304,19 @@ namespace PerorosamaFukuwarai.ViewModels
                     break;
                 
             }
+            nowPeroroImageNum++;
             if(path == null)
             {
                 image.Source = PeroroFileManager.ReturnBitmapImageResource("transparentImage.png");
                 return;
             }
-            
+           
             image.Source = PeroroFileManager.ReturnBitmapImage(path);
         }
 
         private void ShowCompleteImage()
         {
+            peroroBodyImage.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.Body);
             peroroEyeRImage.Visibility = Visibility.Visible;
             peroroEyeLImage.Visibility = Visibility.Visible;
             peroroCheekRImage.Visibility = Visibility.Visible;
