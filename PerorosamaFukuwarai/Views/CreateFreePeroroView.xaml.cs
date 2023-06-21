@@ -27,25 +27,9 @@ namespace PerorosamaFukuwarai.Views
             InitializeComponent();
             DataContext = new CreateFreePeroroViewModel();
 
-            nextImage.Source = PeroroFileManager.ReturnBitmapImage(VM.peroroComposition.EyeR);
-            VM.peroroEyeRImage = PeroroEyeRImage;
-            VM.peroroEyeLImage = PeroroEyeLImage;
-            VM.peroroCheekRImage = PeroroCheekRImage;
-            VM.peroroCheekLImage = PeroroCheekLImage;
-            VM.peroroMouthImage = PeroroMouthImage;
-            VM.peroroTongueImage = PeroroTongueImage;
+            
         }
 
-        private CreateFreePeroroViewModel VM => (CreateFreePeroroViewModel)DataContext;
-
-        private void GetMouseClickPositon(object sender, MouseButtonEventArgs e)
-        {
-            VM.NextStepPeroro(e.GetPosition(this), nextImage);
-        }
-
-        private void GetMouseMovePotison(object sender, MouseEventArgs e)
-        {
-            VM.FollowMousePeroroImage(e.GetPosition(this));
-        }
+       
     }
 }
