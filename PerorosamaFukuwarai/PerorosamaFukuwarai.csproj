@@ -99,6 +99,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="PeroroManager\PeroroComposition.cs" />
+    <Compile Include="PeroroManager\PeroroControllManager.cs" />
     <Compile Include="PeroroManager\PeroroFileManager.cs" />
     <Compile Include="ViewModels\ConfigViewModel.cs" />
     <Compile Include="ViewModels\CreateFreePeroroViewModel.cs" />

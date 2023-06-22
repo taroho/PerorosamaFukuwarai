@@ -60,11 +60,10 @@ namespace PerorosamaFukuwarai.ViewModels
                 byte green = Convert.ToByte(colorCode[3]);
                 CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
             }
-            catch(System.FormatException )
+            catch 
             {
-                System.Windows.MessageBox.Show("無効な数値です。0~255の値を入力してください", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Debug.Print("byte");
             }
-           
 
         }
 

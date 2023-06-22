@@ -33,20 +33,16 @@ namespace PerorosamaFukuwarai.Views
             VM.TextBoxAccessaryNum = TextBoxAccessaryNum;
 
             VM.SetText();
-
-            string[] colorCode = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[0].Split(',');
-            byte alpha = Convert.ToByte(colorCode[0]);
-            byte red = Convert.ToByte(colorCode[1]);
-            byte blue = Convert.ToByte(colorCode[2]);
-            byte green = Convert.ToByte(colorCode[3]);
-
-            Debug.Print(red.ToString());
-            TextBackGruond.Foreground = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
         }
 
         private void ButtonConfigSave(object sender, RoutedEventArgs e)
         {
             VM.ConfigSave();
+        }
+
+        private void TextBoxBackGruond_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            VM.LimitInput(e);
         }
     }
 }

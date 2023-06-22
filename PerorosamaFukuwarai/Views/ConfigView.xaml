@@ -16,12 +16,12 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock x:Name="TextBackGruond" Text="BackGround" Foreground="{Binding BackGroundColor, UpdateSourceTrigger=PropertyChanged}" ></TextBlock>
+            <TextBlock x:Name="TextBackGruond" Text="BackGround"></TextBlock>
             <TextBlock x:Name="TextAccessaryNum" Text="Accessary Num"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Column="1">
-            <TextBox x:Name="TextBoxBackGruond" InputMethod.IsInputMethodEnabled="False" ></TextBox>
-            <TextBox x:Name="TextBoxAccessaryNum" InputMethod.IsInputMethodEnabled="False"></TextBox>
+            <TextBox x:Name="TextBoxBackGruond" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="TextBoxBackGruond_PreviewTextInput"></TextBox>
+            <TextBox x:Name="TextBoxAccessaryNum" InputMethod.IsInputMethodEnabled="False" PreviewTextInput="TextBoxBackGruond_PreviewTextInput"></TextBox>
         </StackPanel>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Button Content="Save" Click="ButtonConfigSave"></Button>

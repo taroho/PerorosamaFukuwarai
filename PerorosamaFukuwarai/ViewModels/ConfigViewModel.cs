@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace PerorosamaFukuwarai.ViewModels
@@ -33,6 +35,10 @@ namespace PerorosamaFukuwarai.ViewModels
             textBoxList.AddRange(new List<string>() { TextBoxBackGruond.Text, TextBoxAccessaryNum.Text });
             PeroroFileManager.WriteConfigFile(textBoxList);
         }
-            
+           
+        public void LimitInput(TextCompositionEventArgs e)
+        {
+            e.Handled = !new Regex("[0-9,]").IsMatch(e.Text);
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace PerorosamaFukuwarai.ViewModels
 {
@@ -48,13 +49,19 @@ namespace PerorosamaFukuwarai.ViewModels
             ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
             ImagePeroroBody.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[0].GetPath());
             string[] colorCode = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[0].Split(',');
-            byte alpha = Convert.ToByte(colorCode[0]);
-            byte red = Convert.ToByte(colorCode[1]);
-            byte blue = Convert.ToByte(colorCode[2]);
-            byte green = Convert.ToByte(colorCode[3]);
 
-            Debug.Print(red.ToString());
-            CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+            try
+            {
+                byte alpha = Convert.ToByte(colorCode[0]);
+                byte red = Convert.ToByte(colorCode[1]);
+                byte blue = Convert.ToByte(colorCode[2]);
+                byte green = Convert.ToByte(colorCode[3]);
+                CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+            }
+            catch
+            {
+                Debug.Print("byte");
+            }
 
         }
 
