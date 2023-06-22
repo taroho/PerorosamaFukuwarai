@@ -30,6 +30,7 @@ namespace PerorosamaFukuwarai
 
             ButtonImage.Source = PeroroFileManager.ReturnBitmapImageResource("perorobody.png");
             ButtonFreeImage.Source = PeroroFileManager.ReturnBitmapImageResource("peroroImageresources.png");
+            ButtonConfigImage.Source = PeroroFileManager.ReturnBitmapImageResource("haguruma.png");
         }
 
         private MainWindowViewModel VM => (MainWindowViewModel) DataContext;
