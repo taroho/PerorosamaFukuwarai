@@ -30,13 +30,15 @@ namespace PerorosamaFukuwarai.ViewModels
         public Image ImagePeroroCheekL;
         public Image ImagePeroroMouth;
         public Image ImagePeroroTongue;
+        public List<Image> ImagePeroroAccessariesList =new List<Image>();
         public Image ImagePeroroNext;
 
         public List<Image> ImagePeroroList = new List<Image>();
         
         public CreatePeroroViewModel()
         {
-            
+            peroroComposition.AddPeroroAccessary();
+            ImagePeroroAccessariesList.Add(new Image());
         }
 
 
@@ -81,11 +83,23 @@ namespace PerorosamaFukuwarai.ViewModels
             ImagePeroroList.AddRange
                 (new Image[] {ImagePeroroBody, ImagePeroroEyeR, ImagePeroroEyeL, 
                                ImagePeroroCheekR,ImagePeroroCheekL, ImagePeroroMouth, ImagePeroroTongue});
-            for (int i = 0; i < peroroComposition.GetPeroroPartListCount();i++)
+            for (int i = 0; i < ImagePeroroList.Count();i++)
             {
                 ImagePeroroList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i].GetPath());
                 ImagePeroroList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i].GetPos().X, 
                                                                             peroroComposition.PeroroPartsList[i].GetPos().Y);
+            }
+            for (int i = 0;i < ImagePeroroAccessariesList.Count(); i++)
+            {
+                Debug.Print("aaa");
+                ImagePeroroAccessariesList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i+ImagePeroroList.Count()].GetPath());
+                ImagePeroroAccessariesList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().X,
+                                                                                       peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().Y);
+                ImagePeroroAccessariesList[i].Width = 400;
+                ImagePeroroAccessariesList[i].Height = 400;
+                ImagePeroroAccessariesList[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                ImagePeroroAccessariesList[i].VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                CanvasPeroro.Children.Add(ImagePeroroAccessariesList[i]);
             }
         }
     }

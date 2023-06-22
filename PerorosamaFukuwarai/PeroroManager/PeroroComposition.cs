@@ -7,6 +7,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai.PeroroManager
 {
@@ -57,6 +58,23 @@ namespace PerorosamaFukuwarai.PeroroManager
             return PeroroPartsList.Count;
         }
 
+        public void AddPeroroAccessary()
+        {
+            PeroroPart peroroPart = new PeroroPart();
+            peroroPart.SetPath(ReturnRandomPeroroAccessary());                     
+            this.PeroroPartsList.Add(peroroPart);
+        }
+
+        private string ReturnRandomPeroroAccessary()
+        {
+            string path = ProjectPath + "/Peroro/Accessaries";
+            string[] imgPathList = Directory.GetFiles(path, "*.png");
+            Random randImg = new System.Random();
+            int imagePathNum = randImg.Next(0, imgPathList.Length);
+
+            return imgPathList[imagePathNum];
+        }
+
         
         private void SetPeroroComposition(List<PeroroPart> peroroPartsList)
         {
@@ -86,7 +104,6 @@ namespace PerorosamaFukuwarai.PeroroManager
             string[] imgPathList = Directory.GetFiles(path, "*.png");
             Random randImg = new System.Random();
             int imagePathNum = randImg.Next(0, imgPathList.Length);
-            Debug.Print(path);
             peroroPartsList[num].SetPath(imgPathList[imagePathNum]);
         }
     }

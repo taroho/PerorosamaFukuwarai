@@ -10,6 +10,51 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+        <Canvas Background="White" Grid.Row="0" Width="400" Height="400" x:Name="CanvasPeroro" MouseDown="GetMouseClickPositon" Mouse.MouseMove="GetMouseMovePotison">
+            <Image 
+                x:Name="ImagePeroroBody"
+                Width="400"
+                Height="400"></Image>
+            <Image 
+                x:Name="ImagePeroroEyeR"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image 
+                x:Name="ImagePeroroEyeL"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image 
+                x:Name="ImagePeroroCheekR"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image 
+                x:Name="ImagePeroroCheekL"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image 
+                x:Name="ImagePeroroMouth"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image 
+                x:Name="ImagePeroroTongue"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Width="400"
+                Height="400">
+            </Image>
+            <Image x:Name="ImagePeroroNext" Width="400" Height="400" HorizontalAlignment="Left" VerticalAlignment="Top">
+            </Image>
+
+        </Canvas>
     </Grid>
+
 </UserControl>
