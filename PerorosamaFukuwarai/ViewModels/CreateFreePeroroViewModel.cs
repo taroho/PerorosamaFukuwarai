@@ -42,7 +42,12 @@ namespace PerorosamaFukuwarai.ViewModels
         {
             for (int i = 0; i < Convert.ToInt32(PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[1]); i++)
             {
-                ImagePeroroAccessariesList.Add(new Image());
+                Image image = new Image();
+                image.Width = 400;
+                image.Height = 400;
+                image.VerticalAlignment = VerticalAlignment.Top;
+                image.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                ImagePeroroAccessariesList.Add(image);
                 peroroComposition.AddPeroroAccessary();
             }
 
@@ -75,13 +80,13 @@ namespace PerorosamaFukuwarai.ViewModels
             if (nowPeroroImageNum == 0)
             {
 
-                ImagePeroroBody.Visibility = Visibility.Hidden;
                 ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum + 1].GetPath());
                 nowPeroroImageNum++;
                 return;
             }
             else if (nowPeroroImageNum == peroroComposition.GetPeroroPartListCount() - 1)
             {
+                Debug.Print((peroroComposition.GetPeroroPartListCount() - 1).ToString());
                 peroroComposition.PeroroPartsList[peroroComposition.GetPeroroPartListCount() - 1].SetPos(mousepos);
                 ShowResultPeroroImage();
                 nowPeroroImageNum++;
@@ -96,35 +101,58 @@ namespace PerorosamaFukuwarai.ViewModels
 
             peroroComposition.PeroroPartsList[nowPeroroImageNum].SetPos(mousepos);
             ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum + 1].GetPath());
+            switch(nowPeroroImageNum)
+            {
+                case 1:
+                    ImagePeroroEyeR.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroEyeR.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    break;
+                case 2:
+                    ImagePeroroEyeL.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroEyeL.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    break;
+                case 3:
+                    ImagePeroroCheekR.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroCheekR.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    break;
+                case 4:
+                    ImagePeroroCheekL.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroCheekL.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    break;
+                case 5:
+                    ImagePeroroMouth.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroMouth.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    break;
+                case 6:
+                    ImagePeroroTongue.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroTongue.RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    Debug.Print(nowPeroroImageNum.ToString());
+
+                    break;
+                default:
+                    ImagePeroroAccessariesList[nowPeroroImageNum - 7].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+                    ImagePeroroAccessariesList[nowPeroroImageNum - 7].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+                    CanvasPeroro.Children.Add(ImagePeroroAccessariesList[nowPeroroImageNum - 7]);
+                    break;
+            }
             nowPeroroImageNum++;
         }
 
+        
         private void ShowResultPeroroImage()
         {
-            ImagePeroroBody.Visibility = Visibility.Visible;
-            ImagePeroroNext.Visibility = Visibility.Hidden;
-            ImagePeroroList.AddRange
-                (new Image[] {ImagePeroroBody, ImagePeroroEyeR, ImagePeroroEyeL,
-                               ImagePeroroCheekR,ImagePeroroCheekL, ImagePeroroMouth, ImagePeroroTongue});
-           
-            for (int i = 0; i < ImagePeroroList.Count(); i++)
-            {
-                ImagePeroroList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i].GetPath());
-                ImagePeroroList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i].GetPos().X,
-                                                                            peroroComposition.PeroroPartsList[i].GetPos().Y);
-            }
-            for (int i = 0; i < ImagePeroroAccessariesList.Count(); i++)
-            {
-                Debug.Print("aaa");
-                ImagePeroroAccessariesList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPath());
-                ImagePeroroAccessariesList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().X,
-                                                                                       peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().Y);
-                ImagePeroroAccessariesList[i].Width = 400;
-                ImagePeroroAccessariesList[i].Height = 400;
-                ImagePeroroAccessariesList[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                ImagePeroroAccessariesList[i].VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                CanvasPeroro.Children.Add(ImagePeroroAccessariesList[i]);
-            }
+            ImagePeroroNext.Visibility = Visibility.Collapsed;
+            ImagePeroroAccessariesList[nowPeroroImageNum - 7].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+            ImagePeroroAccessariesList[nowPeroroImageNum - 7].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().X,
+                                                                    peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPos().Y);
+            CanvasPeroro.Children.Add(ImagePeroroAccessariesList[nowPeroroImageNum - 7]);
         }
     }
 }

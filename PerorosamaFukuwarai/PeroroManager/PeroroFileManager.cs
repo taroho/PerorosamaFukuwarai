@@ -34,7 +34,6 @@ namespace PerorosamaFukuwarai.PeroroManager
                 }
 
                 // FileNameで選択されたフォルダを取得する
-                System.Windows.MessageBox.Show($"{cofd.FileName}を選択しました");
                 return cofd.FileName;
             }
         }

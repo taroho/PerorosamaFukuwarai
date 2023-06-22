@@ -61,7 +61,8 @@ namespace PerorosamaFukuwarai.PeroroManager
         public void AddPeroroAccessary()
         {
             PeroroPart peroroPart = new PeroroPart();
-            peroroPart.SetPath(ReturnRandomPeroroAccessary());                     
+            peroroPart.SetPath(ReturnRandomPeroroAccessary());
+            peroroPart.SetPeroroEnum(Peroro.Accessaries);
             this.PeroroPartsList.Add(peroroPart);
         }
 
