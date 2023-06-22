@@ -1,6 +1,7 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
+using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai.PeroroManager
 {
@@ -109,6 +111,56 @@ namespace PerorosamaFukuwarai.PeroroManager
                 encoder = encoder ?? new PngBitmapEncoder();
                 encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
                 encoder.Save(os);
+            }
+        }
+
+        public static List<string> ReturnTextFile(string path)
+        {
+            
+            //読み込むテキストを保存する変数
+            var texts = new List<string>();
+
+            try
+            {
+                //ファイルをオープンする
+                using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("Shift_JIS")))
+                {
+                    while (0 <= sr.Peek())
+                    {
+                        texts.Add(sr.ReadLine());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return texts;
+        }
+
+        public static List<string> ReturnConfigText(List<string> texts, int num = 1)
+        {
+            List<string> result = new List<string>();   
+            foreach (string text in texts)
+            {
+                string[] dest = text.Split(new char[] { '=', ';' });
+                result.Add(dest[num]);
+            }
+            return result;
+        }
+
+        public static void WriteConfigFile(List<string> textbox)
+        {
+            List<string> text = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"), 0);
+            string path = "Peroro/Config.txt";
+            //ファイルをオープンする
+            using (StreamWriter sw = new StreamWriter(path, false, Encoding.GetEncoding("Shift_JIS")))
+            {
+                for (int i = 0; i < textbox.Count; i++)
+                {
+                    textbox[i] = textbox[i].Replace(" ", "");
+                    sw.WriteLine(text[i] +"="+textbox[i]+";");
+                }
             }
         }
 

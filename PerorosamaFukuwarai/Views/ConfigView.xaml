@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PerorosamaFukuwarai.Views.ConfigView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PerorosamaFukuwarai.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock x:Name="TextBackGruond" Text="BackGround" Foreground="{Binding BackGroundColor, UpdateSourceTrigger=PropertyChanged}" ></TextBlock>
+            <TextBlock x:Name="TextAccessaryNum" Text="Accessary Num"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBox x:Name="TextBoxBackGruond" InputMethod.IsInputMethodEnabled="False" ></TextBox>
+            <TextBox x:Name="TextBoxAccessaryNum" InputMethod.IsInputMethodEnabled="False"></TextBox>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Button Content="Save" Click="ButtonConfigSave"></Button>
+        </Grid>
+    </Grid>
+</UserControl>

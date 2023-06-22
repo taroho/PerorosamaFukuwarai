@@ -41,6 +41,9 @@ namespace PerorosamaFukuwarai.ViewModels
             ActiveView = new CreatePeroroViewModel();
         }
 
-       
+       public void GoConfigView()
+        {
+            ActiveView = new ConfigViewModel();
+        }
     }
 }

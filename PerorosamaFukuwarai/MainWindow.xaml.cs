@@ -43,5 +43,10 @@ namespace PerorosamaFukuwarai
         {
             VM.GoCreatePeroroView();
         }
+
+        private void ButtonOpenConfig(object sender, RoutedEventArgs e)
+        {
+            VM.GoConfigView();
+        }
     }
 }

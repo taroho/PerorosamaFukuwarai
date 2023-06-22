@@ -38,8 +38,8 @@ namespace PerorosamaFukuwarai.Views
             VM.ImagePeroroMouth = ImagePeroroMouth;
             VM.ImagePeroroTongue = ImagePeroroTongue;
             VM.ImagePeroroNext = ImagePeroroNext;
-            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
-            ImagePeroroBody.Source = PeroroFileManager.ReturnBitmapImage(VM.peroroComposition.PeroroPartsList[0].GetPath());
+
+            VM.StartUp();
         }
 
         private void GetMouseClickPositon(object sender, MouseButtonEventArgs e)

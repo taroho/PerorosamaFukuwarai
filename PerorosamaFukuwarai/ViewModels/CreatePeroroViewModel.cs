@@ -34,13 +34,33 @@ namespace PerorosamaFukuwarai.ViewModels
         public Image ImagePeroroNext;
 
         public List<Image> ImagePeroroList = new List<Image>();
-        
+
         public CreatePeroroViewModel()
         {
-            peroroComposition.AddPeroroAccessary();
-            ImagePeroroAccessariesList.Add(new Image());
+
+           
         }
 
+        public void StartUp()
+        {
+            for (int i = 0; i < Convert.ToInt32(PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[1]); i++)
+            {
+                ImagePeroroAccessariesList.Add(new Image());
+                peroroComposition.AddPeroroAccessary();
+            }
+
+            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
+            ImagePeroroBody.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[0].GetPath());
+            string[] colorCode = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[0].Split(',');
+            byte alpha = Convert.ToByte(colorCode[0]);
+            byte red = Convert.ToByte(colorCode[1]);
+            byte blue = Convert.ToByte(colorCode[2]);
+            byte green = Convert.ToByte(colorCode[3]);
+
+            Debug.Print(red.ToString());
+            CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+
+        }
 
         public void FollowMousePeroroImage(Point mousepos)
         {
