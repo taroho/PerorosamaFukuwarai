@@ -58,7 +58,6 @@ namespace PerorosamaFukuwarai.PeroroManager
         }
 
         
-
         private void SetPeroroComposition(List<PeroroPart> peroroPartsList)
         {
             string path = ProjectPath + "/Peroro/";

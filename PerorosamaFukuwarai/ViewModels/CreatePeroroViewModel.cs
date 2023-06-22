@@ -21,9 +21,8 @@ namespace PerorosamaFukuwarai.ViewModels
     public class CreatePeroroViewModel : ViewModelBase
     {
         public PeroroComposition peroroComposition = new PeroroComposition();
-        private int nowPeroroImageNum;
+        private int nowPeroroImageNum = 0;
         public Canvas CanvasPeroro;
-
         public Image ImagePeroroBody;
         public Image ImagePeroroEyeR;
         public Image ImagePeroroEyeL;
@@ -32,44 +31,14 @@ namespace PerorosamaFukuwarai.ViewModels
         public Image ImagePeroroMouth;
         public Image ImagePeroroTongue;
         public Image ImagePeroroNext;
+
+        public List<Image> ImagePeroroList = new List<Image>();
         
         public CreatePeroroViewModel()
         {
-            nowPeroroImageNum = 0;
+            
         }
 
-
-        public void CreatePeroroImage(string path, Canvas canvas)
-        {
-            if(path==null)
-            {
-                return;
-            }
-            BitmapEncoder encoder = null;
-
-
-            var size = new Size(canvas.Width, canvas.Height);
-            canvas.Measure(size);
-            canvas.Arrange(new Rect(size));
-
-            // VisualObjectをBitmapに変換する
-            var renderBitmap = new RenderTargetBitmap((int)size.Width,       // 画像の幅
-                                                      (int)size.Height,      // 画像の高さ
-                                                      96.0d,                 // 横400.0DPI
-                                                      96.0d,                 // 縦400.0DPI
-                                                      PixelFormats.Pbgra32); // 32bit(RGBA各8bit)
-            renderBitmap.Render(canvas);
-
-            // 出力用の FileStream を作成する
-            using (var os = new FileStream(path, FileMode.Create))
-            {
-                // 変換したBitmapをエンコードしてFileStreamに保存する。
-                // BitmapEncoder が指定されなかった場合は、PNG形式とする。
-                encoder = encoder ?? new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                encoder.Save(os);
-            }
-        }
 
         public void FollowMousePeroroImage(Point mousepos)
         {
@@ -80,14 +49,44 @@ namespace PerorosamaFukuwarai.ViewModels
         {
             if(nowPeroroImageNum == 0)
             {
+
                 ImagePeroroBody.Visibility = Visibility.Hidden;
                 ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum+1].GetPath());
+                nowPeroroImageNum++;
+                return;
+            }
+            else if (nowPeroroImageNum == peroroComposition.GetPeroroPartListCount()-1)
+            {
+                peroroComposition.PeroroPartsList[peroroComposition.GetPeroroPartListCount() -1].SetPos(mousepos);
+                ShowResultPeroroImage();
+                nowPeroroImageNum++;
+                return;
+            }
+            else if(nowPeroroImageNum == peroroComposition.GetPeroroPartListCount())
+            {
+                string path = PeroroFileManager.OpenFolderDialog();
+                PeroroFileManager.CreatePeroroImage(path, CanvasPeroro);
                 return;
             }
 
             peroroComposition.PeroroPartsList[nowPeroroImageNum].SetPos(mousepos);
-            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum].GetPath());
+            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum+1].GetPath());
             nowPeroroImageNum++;
+        }
+
+        private void ShowResultPeroroImage()
+        {
+            ImagePeroroBody.Visibility = Visibility.Visible;
+            ImagePeroroNext.Visibility = Visibility.Hidden;
+            ImagePeroroList.AddRange
+                (new Image[] {ImagePeroroBody, ImagePeroroEyeR, ImagePeroroEyeL, 
+                               ImagePeroroCheekR,ImagePeroroCheekL, ImagePeroroMouth, ImagePeroroTongue});
+            for (int i = 0; i < peroroComposition.GetPeroroPartListCount();i++)
+            {
+                ImagePeroroList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i].GetPath());
+                ImagePeroroList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i].GetPos().X, 
+                                                                            peroroComposition.PeroroPartsList[i].GetPos().Y);
+            }
         }
     }
 }
