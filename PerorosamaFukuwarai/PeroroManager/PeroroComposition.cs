@@ -7,93 +7,141 @@ using System.IO;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai.PeroroManager
 {
+    public enum Peroro
+    {
+        Body,
+        EyeR,
+        EyeL,
+        CheekR,
+        CheekL,
+        Mouth,
+        Tongue,
+        Accessaries,
+    }
+
     public class PeroroComposition
     {
        
         public static string ProjectPath = Directory.GetCurrentDirectory();
-        public readonly static string[] CompositionArray = 
-            { "Body", "EyeR", "EyeL", "CheekR", "CheekL", "Mouth", "Tongue" };
+        
+        public List<PeroroPart> PeroroPartsList = new List<PeroroPart>();
 
-        public string Body;
-        public string EyeR;
-        public string EyeL ;
-        public string CheekR;
-        public string CheekL;
-        public string Mouth;
-        public string Tongue;
-
-        public Point BodyPosition = new Point();
-        public Point EyeRPosition = new Point();
-        public Point EyeLPosition = new Point();
-        public Point CheekRPosition = new Point();  
-        public Point CheekLPosition = new Point();
-        public Point MouthPosition = new Point();
-        public Point TonguePosition = new Point();
+        private PeroroPart Body = new PeroroPart();
+        private PeroroPart EyeR = new PeroroPart();
+        private PeroroPart EyeL = new PeroroPart() ;
+        private PeroroPart CheekR = new PeroroPart();
+        private PeroroPart CheekL = new PeroroPart();
+        private PeroroPart Mouth = new PeroroPart();
+        private PeroroPart Tongue = new PeroroPart();
 
 
-        public PeroroAccessories PeroroAccessories { get; set; }
+
         public PeroroComposition()
         {
-            SetPeroroComposition();
+            Body.SetPeroroEnum(Peroro.Body);
+            EyeR.SetPeroroEnum(Peroro.EyeR);
+            EyeL.SetPeroroEnum(Peroro.EyeL);
+            CheekR.SetPeroroEnum(Peroro.CheekR);
+            CheekL.SetPeroroEnum(Peroro.CheekL);
+            Mouth.SetPeroroEnum(Peroro.Mouth);
+            Tongue.SetPeroroEnum(Peroro.Tongue);
+            PeroroPartsList.AddRange(new List<PeroroPart>() { Body, EyeR, EyeL, CheekR, CheekL, Mouth, Tongue});
+            SetPeroroComposition(this.PeroroPartsList);
         }
         
-       
-
-        private void SetPeroroComposition()
+        public int GetPeroroPartListCount()
         {
-            foreach(string composition in CompositionArray)
-            {
-                string path = ProjectPath + "/Peroro/" + composition;
-                string[] imgPathList = Directory.GetFiles(path, "*.png");
-                Random randImg = new System.Random();
-                int imagePath = randImg.Next(0, imgPathList.Length);
-                switch (composition)
-                {
-                    case "Body":
-                        this.Body = imgPathList[imagePath];
-                        break;
-                    case "EyeR":
-                        this.EyeR = imgPathList[imagePath];
-                        break;
-                    case "EyeL":
-                        this.EyeL = imgPathList[imagePath];
-                        break;
-                    case "CheekR":
-                        this.CheekR = imgPathList[imagePath];
-                        break;
-                    case "CheekL":
-                        this.CheekL = imgPathList[imagePath];
-                        break;
-                    case "Mouth":
-                        this.Mouth = imgPathList[imagePath];
-                        break;
-                    case "Tongue":
-                        this.Tongue = imgPathList[imagePath];
-                        break;
-                    default:
-                        break;
-
-                }
-            }
-            
-            
+            return PeroroPartsList.Count;
         }
 
+        public void AddPeroroAccessary()
+        {
+            PeroroPart peroroPart = new PeroroPart();
+            peroroPart.SetPath(ReturnRandomPeroroAccessary());                     
+            this.PeroroPartsList.Add(peroroPart);
+        }
 
+        private string ReturnRandomPeroroAccessary()
+        {
+            string path = ProjectPath + "/Peroro/Accessaries";
+            string[] imgPathList = Directory.GetFiles(path, "*.png");
+            Random randImg = new System.Random();
+            int imagePathNum = randImg.Next(0, imgPathList.Length);
 
+            return imgPathList[imagePathNum];
+        }
+
+        
+        private void SetPeroroComposition(List<PeroroPart> peroroPartsList)
+        {
+            string path = ProjectPath + "/Peroro/";
+            for (int i = 0;i < peroroPartsList.Count;i++)
+            {
+                SwitchPeroro(i, path, peroroPartsList);
+               
+            }            
+        }
+        private void SwitchPeroro(int num, string path, List<PeroroPart> peroroPartsList)
+        {
+            switch (peroroPartsList[num].GetPeroroEnum())
+            {
+                case Peroro.Body:
+                case Peroro.EyeR:
+                case Peroro.EyeL:
+                case Peroro.CheekR:
+                case Peroro.CheekL:
+                case Peroro.Mouth:
+                case Peroro.Tongue:
+                    path += peroroPartsList[num].GetPeroroEnum().ToString();
+                    break;
+                default:
+                    break;
+            }
+            string[] imgPathList = Directory.GetFiles(path, "*.png");
+            Random randImg = new System.Random();
+            int imagePathNum = randImg.Next(0, imgPathList.Length);
+            peroroPartsList[num].SetPath(imgPathList[imagePathNum]);
+        }
     }
 
-    public class PeroroAccessories
-    {
-        private List<string> AccessoryList = new List<string>();
-        public PeroroAccessories() { }
 
-        public void AddAccessory(string accessory)
+    public class PeroroPart
+    {
+        private Peroro peroroEnum;
+        private string path;
+        private Point pos;
+
+        public void SetPeroroEnum(Peroro peroro)
         {
-            AccessoryList.Add(accessory);
+            this.peroroEnum = peroro;
+        }
+
+        public Peroro GetPeroroEnum() 
+        { 
+            return this.peroroEnum; 
+        }
+
+        public void SetPath(string path)
+        {
+            this.path = path;
+        }
+
+        public string GetPath()
+        {
+            return path;
+        }
+
+        public void SetPos(Point point) 
+        {
+            this.pos = point;
+        }
+        public Point GetPos()
+        {
+            return pos;
         }
     }
 }

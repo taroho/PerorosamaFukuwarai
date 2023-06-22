@@ -10,304 +10,113 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai.ViewModels
 {
-    public class CreateFreePeroroViewModel:ViewModelBase
+    public class CreateFreePeroroViewModel : ViewModelBase
     {
         public PeroroComposition peroroComposition = new PeroroComposition();
-        string[] compositionArray = PeroroComposition.CompositionArray;
-        private int nowPeroroImageNum;
-        public Canvas peroroCanvas;
-        public Image peroroEyeRImage;
-        public Image peroroEyeLImage;
-        public Image peroroCheekRImage;
-        public Image peroroCheekLImage;
-        public Image peroroMouthImage;
-        public Image peroroTongueImage;
+        private int nowPeroroImageNum = 0;
+        public Canvas CanvasPeroro;
+        public Image ImagePeroroBody;
+        public Image ImagePeroroEyeR;
+        public Image ImagePeroroEyeL;
+        public Image ImagePeroroCheekR;
+        public Image ImagePeroroCheekL;
+        public Image ImagePeroroMouth;
+        public Image ImagePeroroTongue;
+        public List<Image> ImagePeroroAccessariesList = new List<Image>();
+        public Image ImagePeroroNext;
+
+        public List<Image> ImagePeroroList = new List<Image>();
 
         public CreateFreePeroroViewModel()
         {
-           
-            nowPeroroImageNum = 0;
-            BodyImage = peroroComposition.Body;
-            EyeRImage = peroroComposition.EyeR;
-            EyeLImage = peroroComposition.EyeL;
-            CheekRImage = peroroComposition.CheekR;
-            CheekLImage = peroroComposition.CheekL;
-            MouthImage = peroroComposition.Mouth;
-            TongueImage = peroroComposition.Tongue;
-
-
-            PeroroEyeR = peroroComposition.EyeRPosition;
-            PeroroEyeL = peroroComposition.EyeLPosition;
-            PeroroCheekR = peroroComposition.CheekRPosition;
-            PeroroCheekL = peroroComposition.CheekLPosition;
-            PeroroMouth = peroroComposition.MouthPosition;
-            PeroroTongue = peroroComposition.TonguePosition;
-        }
-
-        private string bodyImage;
-        public string BodyImage
-        {
-            get { return bodyImage; }
-            set
-            {
-                bodyImage = value;
-                RaisePropertyChanged(nameof(BodyImage));
-            }
-        }
-
-        private string eyeRImage;
-        public string EyeRImage
-        {
-            get { return eyeRImage; }
-            set
-            {
-                eyeRImage = value;
-                RaisePropertyChanged(nameof(EyeRImage));
-            }
-        }
-
-        private string eyeLImage;
-        public string EyeLImage
-        {
-            get { return eyeLImage; }
-            set
-            {
-                eyeLImage = value;
-                RaisePropertyChanged(nameof(EyeLImage));
-            }
-        }
-
-        private string cheekRImage;
-        public string CheekRImage
-        {
-            get { return cheekRImage; }
-            set
-            {
-                cheekRImage = value;
-                RaisePropertyChanged(nameof(CheekRImage));
-            }
-        }
-
-        private string cheekLImage;
-        public string CheekLImage
-        {
-            get { return cheekLImage; }
-            set
-            {
-                cheekLImage = value;
-                RaisePropertyChanged(nameof(CheekLImage));
-            }
-        }
-
-        private string mouthImage;
-        public string MouthImage
-        {
-            get { return mouthImage; }
-            set
-            {
-                mouthImage = value;
-                RaisePropertyChanged(nameof(MouthImage));
-            }
-        }
-
-        private string tongueImage;
-        public string TongueImage
-        {
-            get { return tongueImage; }
-            set
-            {
-                tongueImage = value;
-                RaisePropertyChanged(nameof(TongueImage));
-            }
-        }
-
-
-        private Point peroroNext;
-        public Point PeroroNext
-        {
-            get { return peroroNext; }
-            set
-            {
-                peroroNext = value;
-                RaisePropertyChanged(nameof(PeroroNext));
-            }
-        }
-
-        private Point peroroEyeR;
-        public Point PeroroEyeR
-        {
-            get { return peroroEyeR; }
-            set
-            {
-                peroroEyeR = value;
-                RaisePropertyChanged(nameof(PeroroEyeR));
-            }
-        }
-
-        private Point peroroEyeL;
-        public Point PeroroEyeL
-        {
-            get { return peroroEyeL; }
-            set
-            {
-                peroroEyeL = value;
-                RaisePropertyChanged(nameof(PeroroEyeL));
-            }
-        }
-
-        private Point peroroCheekR;
-        public Point PeroroCheekR
-        {
-            get { return peroroCheekR; }
-            set
-            {
-                peroroCheekR = value;
-                RaisePropertyChanged(nameof(PeroroCheekR));
-            }
-        }
-
-        private Point peroroCheekL;
-        public Point PeroroCheekL
-        {
-            get { return peroroCheekL; }
-            set
-            {
-                peroroCheekL = value;
-                RaisePropertyChanged(nameof(PeroroCheekL));
-            }
-        }
-
-        private Point peroroMouth;
-        public Point PeroroMouth
-        {
-            get { return peroroMouth; }
-            set
-            {
-                peroroMouth = value;
-                RaisePropertyChanged(nameof(PeroroMouth));
-            }
 
 
         }
 
-        private Point peroroTongue;
-        public Point PeroroTongue
+        public void StartUp()
         {
-            get { return peroroTongue; }
-            set
+            for (int i = 0; i < Convert.ToInt32(PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[1]); i++)
             {
-                peroroTongue = value;
-                RaisePropertyChanged(nameof(PeroroTongue));
+                ImagePeroroAccessariesList.Add(new Image());
+                peroroComposition.AddPeroroAccessary();
             }
 
+            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
+            ImagePeroroBody.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[0].GetPath());
+            string[] colorCode = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[0].Split(',');
+            byte alpha = Convert.ToByte(colorCode[0]);
+            byte red = Convert.ToByte(colorCode[1]);
+            byte blue = Convert.ToByte(colorCode[2]);
+            byte green = Convert.ToByte(colorCode[3]);
 
-        }
+            Debug.Print(red.ToString());
+            CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
 
-
-        public void CreatePeroroImage(string path, Canvas canvas)
-        {
-            if (path == null)
-            {
-                return;
-            }
-            BitmapEncoder encoder = null;
-
-
-            var size = new Size(canvas.Width, canvas.Height);
-            canvas.Measure(size);
-            canvas.Arrange(new Rect(size));
-
-            // VisualObjectをBitmapに変換する
-            var renderBitmap = new RenderTargetBitmap((int)size.Width,       // 画像の幅
-                                                      (int)size.Height,      // 画像の高さ
-                                                      96.0d,                 // 横400.0DPI
-                                                      96.0d,                 // 縦400.0DPI
-                                                      PixelFormats.Pbgra32); // 32bit(RGBA各8bit)
-            renderBitmap.Render(canvas);
-
-            // 出力用の FileStream を作成する
-            using (var os = new FileStream(path, FileMode.Create))
-            {
-                // 変換したBitmapをエンコードしてFileStreamに保存する。
-                // BitmapEncoder が指定されなかった場合は、PNG形式とする。
-                encoder = encoder ?? new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                encoder.Save(os);
-            }
         }
 
         public void FollowMousePeroroImage(Point mousepos)
         {
-            PeroroNext = mousepos;
+            ImagePeroroNext.RenderTransform = new TranslateTransform(mousepos.X, mousepos.Y);
         }
 
-        public void NextStepPeroro(Point mousepos, Image image)
+        public void NextStepPeroro(Point mousepos)
         {
-            string path = null;
+            if (nowPeroroImageNum == 0)
+            {
+
+                ImagePeroroBody.Visibility = Visibility.Hidden;
+                ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum + 1].GetPath());
+                nowPeroroImageNum++;
+                return;
+            }
+            else if (nowPeroroImageNum == peroroComposition.GetPeroroPartListCount() - 1)
+            {
+                peroroComposition.PeroroPartsList[peroroComposition.GetPeroroPartListCount() - 1].SetPos(mousepos);
+                ShowResultPeroroImage();
+                nowPeroroImageNum++;
+                return;
+            }
+            else if (nowPeroroImageNum == peroroComposition.GetPeroroPartListCount())
+            {
+                string path = PeroroFileManager.OpenFolderDialog();
+                PeroroFileManager.CreatePeroroImage(path, CanvasPeroro);
+                return;
+            }
+
+            peroroComposition.PeroroPartsList[nowPeroroImageNum].SetPos(mousepos);
+            ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[nowPeroroImageNum + 1].GetPath());
             nowPeroroImageNum++;
-            if (nowPeroroImageNum == compositionArray.Length)
-            {
-                CreatePeroroImage(PeroroFileManager.OpenFolderDialog(), peroroCanvas);
-                return;
-            }
-            if (nowPeroroImageNum >= compositionArray.Length)
-            {
+        }
 
-                return;
-            }
-
-            switch (compositionArray[nowPeroroImageNum])
+        private void ShowResultPeroroImage()
+        {
+            ImagePeroroBody.Visibility = Visibility.Visible;
+            ImagePeroroNext.Visibility = Visibility.Hidden;
+            ImagePeroroList.AddRange
+                (new Image[] {ImagePeroroBody, ImagePeroroEyeR, ImagePeroroEyeL,
+                               ImagePeroroCheekR,ImagePeroroCheekL, ImagePeroroMouth, ImagePeroroTongue});
+            for (int i = 0; i < ImagePeroroList.Count(); i++)
             {
-                case "EyeR":
-                    peroroEyeRImage.Visibility = Visibility.Visible;   
-                    peroroComposition.EyeRPosition = mousepos;
-                    PeroroEyeR = peroroComposition.EyeRPosition;
-                    path = peroroComposition.EyeL;
-                    break;
-                case "EyeL":
-                    peroroEyeLImage.Visibility = Visibility.Visible;
-                    peroroComposition.EyeLPosition = mousepos;
-                    PeroroEyeL = peroroComposition.EyeLPosition;
-                    path = peroroComposition.CheekR;
-                    break;
-                case "CheekR":
-                    peroroCheekRImage.Visibility = Visibility.Visible;
-                    peroroComposition.CheekRPosition = mousepos;
-                    PeroroCheekR = peroroComposition.CheekRPosition;
-                    path = peroroComposition.CheekL;
-                    break;
-                case "CheekL":
-                    peroroCheekLImage.Visibility = Visibility.Visible;
-                    peroroComposition.CheekLPosition = mousepos;
-                    PeroroCheekL = peroroComposition.CheekLPosition;
-                    path = peroroComposition.Mouth;
-                    break;
-                case "Mouth":
-                    peroroMouthImage.Visibility = Visibility.Visible;
-                    peroroComposition.MouthPosition = mousepos;
-                    PeroroMouth = peroroComposition.MouthPosition;
-                    path = peroroComposition.Tongue;
-                    break;
-                case "Tongue":
-                    peroroTongueImage.Visibility = Visibility.Visible;
-                    peroroComposition.TonguePosition = mousepos;
-                    PeroroTongue = peroroComposition.TonguePosition;
-                    path = null;
-                    break;
-                default:
-                    break;
-
+                ImagePeroroList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i].GetPath());
+                ImagePeroroList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i].GetPos().X,
+                                                                            peroroComposition.PeroroPartsList[i].GetPos().Y);
             }
-            if (path == null)
+            for (int i = 0; i < ImagePeroroAccessariesList.Count(); i++)
             {
-                image.Source = PeroroFileManager.ReturnBitmapImageResource("transparentImage.png");
-                return;
+                Debug.Print("aaa");
+                ImagePeroroAccessariesList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPath());
+                ImagePeroroAccessariesList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().X,
+                                                                                       peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().Y);
+                ImagePeroroAccessariesList[i].Width = 400;
+                ImagePeroroAccessariesList[i].Height = 400;
+                ImagePeroroAccessariesList[i].HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                ImagePeroroAccessariesList[i].VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                CanvasPeroro.Children.Add(ImagePeroroAccessariesList[i]);
             }
-
-            image.Source = PeroroFileManager.ReturnBitmapImage(path);
         }
     }
 }

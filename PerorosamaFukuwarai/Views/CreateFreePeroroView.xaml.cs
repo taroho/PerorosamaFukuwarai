@@ -22,26 +22,31 @@ namespace PerorosamaFukuwarai.Views
     /// </summary>
     public partial class CreateFreePeroroView : UserControl
     {
+        private CreateFreePeroroViewModel VM => (CreateFreePeroroViewModel)DataContext;
+
         public CreateFreePeroroView()
         {
             InitializeComponent();
             DataContext = new CreateFreePeroroViewModel();
 
-            nextImage.Source = PeroroFileManager.ReturnBitmapImage(VM.peroroComposition.EyeR);
-            VM.peroroEyeRImage = PeroroEyeRImage;
-            VM.peroroEyeLImage = PeroroEyeLImage;
-            VM.peroroCheekRImage = PeroroCheekRImage;
-            VM.peroroCheekLImage = PeroroCheekLImage;
-            VM.peroroMouthImage = PeroroMouthImage;
-            VM.peroroTongueImage = PeroroTongueImage;
-        }
+            VM.CanvasPeroro = CanvasPeroro;
+            VM.ImagePeroroBody = ImagePeroroBody;
+            VM.ImagePeroroEyeR = ImagePeroroEyeR;
+            VM.ImagePeroroEyeL = ImagePeroroEyeL;
+            VM.ImagePeroroCheekR = ImagePeroroCheekR;
+            VM.ImagePeroroCheekL = ImagePeroroCheekL;
+            VM.ImagePeroroMouth = ImagePeroroMouth;
+            VM.ImagePeroroTongue = ImagePeroroTongue;
+            VM.ImagePeroroNext = ImagePeroroNext;
 
-        private CreateFreePeroroViewModel VM => (CreateFreePeroroViewModel)DataContext;
+            VM.StartUp();
+        }
 
         private void GetMouseClickPositon(object sender, MouseButtonEventArgs e)
         {
-            VM.NextStepPeroro(e.GetPosition(this), nextImage);
+            VM.NextStepPeroro(e.GetPosition(this));
         }
+
 
         private void GetMouseMovePotison(object sender, MouseEventArgs e)
         {

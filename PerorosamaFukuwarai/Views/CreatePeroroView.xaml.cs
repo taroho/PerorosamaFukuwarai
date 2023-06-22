@@ -26,33 +26,38 @@ namespace PerorosamaFukuwarai.Views
     /// </summary>
     public partial class CreatePeroroView : UserControl
     {
+        private CreatePeroroViewModel VM => (CreatePeroroViewModel)DataContext;
+
         public CreatePeroroView()
         {
+
             InitializeComponent();
             DataContext = new CreatePeroroViewModel();
 
-            nextImage.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
-            VM.peroroCanvas = peroroCanvas;
-            VM.peroroEyeRImage = PeroroEyeRImage;
-            VM.peroroEyeLImage = PeroroEyeLImage;
-            VM.peroroCheekRImage = PeroroCheekRImage;
-            VM.peroroCheekLImage = PeroroCheekLImage;
-            VM.peroroMouthImage = PeroroMouthImage;
-            VM.peroroTongueImage = PeroroTongueImage;
-            VM.peroroBodyImage = PeroroBodyImage;
+            VM.CanvasPeroro = CanvasPeroro;
+            VM.ImagePeroroBody = ImagePeroroBody;
+            VM.ImagePeroroEyeR = ImagePeroroEyeR;
+            VM.ImagePeroroEyeL = ImagePeroroEyeL;
+            VM.ImagePeroroCheekR = ImagePeroroCheekR;
+            VM.ImagePeroroCheekL = ImagePeroroCheekL;
+            VM.ImagePeroroMouth = ImagePeroroMouth;
+            VM.ImagePeroroTongue = ImagePeroroTongue;
+            VM.ImagePeroroNext = ImagePeroroNext;
+
+
+            VM.StartUp();
         }
 
-        private CreatePeroroViewModel VM => (CreatePeroroViewModel)DataContext;
 
         private void GetMouseClickPositon(object sender, MouseButtonEventArgs e) 
         {
-            VM.NextStepPeroro(e.GetPosition(this), nextImage);
+            VM.NextStepPeroro(e.GetPosition(this));
         }
         
          
         private void GetMouseMovePotison(object sender, MouseEventArgs e)
         {
-           VM.FollowMousePeroroImage(e.GetPosition(this));           
+            VM.FollowMousePeroroImage(e.GetPosition(this));
         }
     }
 }

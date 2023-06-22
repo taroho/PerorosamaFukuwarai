@@ -24,8 +24,11 @@
             <DataTemplate  DataType="{x:Type vm:CreateFreePeroroViewModel}">
                 <view:CreateFreePeroroView></view:CreateFreePeroroView>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ConfigViewModel}">
+                <view:ConfigView></view:ConfigView>
+            </DataTemplate>
         </Grid.Resources>
-        
+
         <ContentControl Grid.Row="1" Content="{Binding ActiveView}" ></ContentControl>
         <Grid Grid.Column="1" Grid.Row="1" Background="Gold">
             <Button  HorizontalAlignment="Center" 
@@ -39,6 +42,12 @@
                     Margin="0,250,0,0" VerticalAlignment="Top" Height="100" Width="100"
                     Click="ClickCreateButton">
                 <Image x:Name="ButtonFreeImage" ></Image>
+            </Button>
+            <Button HorizontalAlignment="Left" 
+                    Margin="50,10,0,0" VerticalAlignment="Top" Height="30" Width="30" 
+                    RenderTransformOrigin="0.458,1.404"
+                    Click="ButtonOpenConfig">
+
             </Button>
         </Grid>
     </Grid>
