@@ -52,13 +52,19 @@ namespace PerorosamaFukuwarai.ViewModels
             ImagePeroroNext.Source = PeroroFileManager.ReturnBitmapImageResource("start.png");
             ImagePeroroBody.Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[0].GetPath());
             string[] colorCode = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"))[0].Split(',');
-            byte alpha = Convert.ToByte(colorCode[0]);
-            byte red = Convert.ToByte(colorCode[1]);
-            byte blue = Convert.ToByte(colorCode[2]);
-            byte green = Convert.ToByte(colorCode[3]);
-
-            Debug.Print(red.ToString());
-            CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+            try
+            {
+                byte alpha = Convert.ToByte(colorCode[0]);
+                byte red = Convert.ToByte(colorCode[1]);
+                byte blue = Convert.ToByte(colorCode[2]);
+                byte green = Convert.ToByte(colorCode[3]);
+                CanvasPeroro.Background = new SolidColorBrush(Color.FromArgb(alpha, red, green, blue));
+            }
+            catch(System.FormatException )
+            {
+                System.Windows.MessageBox.Show("無効な数値です。0~255の値を入力してください", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+           
 
         }
 
@@ -111,7 +117,6 @@ namespace PerorosamaFukuwarai.ViewModels
             }
             for (int i = 0;i < ImagePeroroAccessariesList.Count(); i++)
             {
-                Debug.Print("aaa");
                 ImagePeroroAccessariesList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i+ImagePeroroList.Count()].GetPath());
                 ImagePeroroAccessariesList[i].RenderTransform = new TranslateTransform(peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().X,
                                                                                        peroroComposition.PeroroPartsList[i + ImagePeroroList.Count()].GetPos().Y);

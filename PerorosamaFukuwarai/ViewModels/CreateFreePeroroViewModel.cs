@@ -99,6 +99,7 @@ namespace PerorosamaFukuwarai.ViewModels
             ImagePeroroList.AddRange
                 (new Image[] {ImagePeroroBody, ImagePeroroEyeR, ImagePeroroEyeL,
                                ImagePeroroCheekR,ImagePeroroCheekL, ImagePeroroMouth, ImagePeroroTongue});
+           
             for (int i = 0; i < ImagePeroroList.Count(); i++)
             {
                 ImagePeroroList[i].Source = PeroroFileManager.ReturnBitmapImage(peroroComposition.PeroroPartsList[i].GetPath());
