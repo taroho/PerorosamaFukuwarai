@@ -82,7 +82,7 @@ namespace PerorosamaFukuwarai.ViewModels
             }
             else if(nowPeroroImageNum == peroroComposition.GetPeroroPartListCount())
             {
-                string path = PeroroFileManager.OpenFolderDialog();
+                string path = PeroroFileManager.OpenFileDialog();
                 PeroroFileManager.CreatePeroroImage(path, CanvasPeroro);
                 return;
             }

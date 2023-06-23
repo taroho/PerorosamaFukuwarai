@@ -11,19 +11,25 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Resources;
-using System.Windows.Shapes;
 
 namespace PerorosamaFukuwarai.PeroroManager
 {
+    /// <summary>
+    /// ファイル関連の操作
+    /// </summary>
     public class PeroroFileManager
     {
         public PeroroFileManager() { }
 
-        public static string OpenFolderDialog()
+        /// <summary>
+        /// ファイルを選択するダイアログを開きます
+        /// </summary>
+        /// <returns>string path</returns>
+        public static string OpenFileDialog()
         {
             using (var cofd = new CommonOpenFileDialog()
             {
-                Title = "フォルダを選択してください",
+                Title = "ファイルを選択してください",
                 InitialDirectory = @"D:\Users\threeshark",
                 DefaultFileName = "peroroImage.png",
             })
@@ -37,7 +43,11 @@ namespace PerorosamaFukuwarai.PeroroManager
                 return cofd.FileName;
             }
         }
-
+        /// <summary>
+        /// 画像のBitmapImageを返します
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>BitmapImage</returns>
         public static BitmapImage ReturnBitmapImage(string path)
         {
             BitmapImage bmpImage = new BitmapImage();
@@ -81,6 +91,11 @@ namespace PerorosamaFukuwarai.PeroroManager
             return result;
         }
 
+        /// <summary>
+        /// 選択したキャンバスをpathの位置に保存します
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="canvas"></param>
         public static void CreatePeroroImage(string path, Canvas canvas)
         {
             if (path == null)
@@ -88,7 +103,14 @@ namespace PerorosamaFukuwarai.PeroroManager
                 return;
             }
             BitmapEncoder encoder = null;
-
+            //選択したパスにファイルが存在する場合上書きするかを確認
+            if (File.Exists(path))
+            {
+                var message = System.Windows.MessageBox.Show("ファイルが存在します\n上書きしますか？", "確認", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (message == MessageBoxResult.No)
+                    CreatePeroroImage(OpenFileDialog(), canvas);
+            }
+            
 
             var size = new Size(canvas.Width, canvas.Height);
             canvas.Measure(size);
@@ -113,6 +135,11 @@ namespace PerorosamaFukuwarai.PeroroManager
             }
         }
 
+        /// <summary>
+        /// pathのテキストファイルをListの各要素に一行づついれる
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns>List</returns>
         public static List<string> ReturnTextFile(string path)
         {
             
@@ -137,6 +164,12 @@ namespace PerorosamaFukuwarai.PeroroManager
             return texts;
         }
 
+        /// <summary>
+        /// pathのテキストファイルを分割してかえします
+        /// </summary>
+        /// <param name="texts">文章をリストで入力</param>
+        /// <param name="num">返すテキストの位置 0なら設定の文</param>
+        /// <returns></returns>
         public static List<string> ReturnConfigText(List<string> texts, int num = 1)
         {
             List<string> result = new List<string>();   
@@ -148,6 +181,16 @@ namespace PerorosamaFukuwarai.PeroroManager
             return result;
         }
 
+        /*
+         * 順番指定できるように書き換える場合、PeroroFileManagerの
+         *  ReturnConfigTex,ReturnTextFileも書き換えたほうがいいです
+         */
+        /// <summary>
+        /// リストの先頭から順に設定の値を書き込みます
+        /// リストの順番は決まっています
+        /// [ backgroundcolor, accessarynum]
+        /// </summary>
+        /// <param name="textbox"></param>
         public static void WriteConfigFile(List<string> textbox)
         {
             List<string> text = PeroroFileManager.ReturnConfigText(PeroroFileManager.ReturnTextFile("Peroro/Config.txt"), 0);

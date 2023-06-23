@@ -34,6 +34,9 @@ namespace PerorosamaFukuwarai.ViewModels
             TextBoxAccessaryNum.Text = CheckedTextBoxAccessaryNum;
         }
 
+        /// <summary>
+        /// /Peroro/Config.txtにTextBoxの内容を保存します
+        /// </summary>
         public void ConfigSave()
         {
             List<string> textBoxList = new List<string>();
@@ -48,14 +51,42 @@ namespace PerorosamaFukuwarai.ViewModels
             e.Handled = !new Regex("[0-9,]").IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// 設定が正しい値が入力されているのかのチェック
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private string CheckConfigTextBackGruond(string str)
         {
-            if(string.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str))
             {
                 str = "0,0,0,0";
                 System.Windows.MessageBox.Show(
                     "BackGroundColorの値が無効です。\n\"a,R,B,G\"です。各値は0~255", "警告", 
                     System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return str;
+            }
+            string[] strArr = str.Split(',');
+            for (int i = 0; i < 4; i++)
+            {
+                //各値が空でないかの確認
+                if (string.IsNullOrEmpty(strArr[i]))
+                {
+                    str = "0,0,0,0";
+                    System.Windows.MessageBox.Show(
+                        "BackGroundColorの値が無効です。\n\"a,R,B,G\"です。各値は0~255", "警告",
+                        System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    break;
+                }
+                //最大値、最小値の確認
+                if (Convert.ToInt32(strArr[i]) > 255 || Convert.ToInt32(strArr[i]) < 0)
+                {
+                    str = "0,0,0,0";
+                    System.Windows.MessageBox.Show(
+                        "BackGroundColorの値が無効です。\n\"a,R,B,G\"です。各値は0~255", "警告",
+                        System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    break;
+                }
             }
             return str;
         }

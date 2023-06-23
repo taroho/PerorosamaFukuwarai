@@ -11,7 +11,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Shapes;
-using System.Windows.Forms;
 
 namespace PerorosamaFukuwarai.ViewModels
 {
@@ -83,7 +82,7 @@ namespace PerorosamaFukuwarai.ViewModels
             }
             else if (nowPeroroImageNum == peroroComposition.GetPeroroPartListCount())
             {
-                string path = PeroroFileManager.OpenFolderDialog();
+                string path = PeroroFileManager.OpenFileDialog();
                 PeroroFileManager.CreatePeroroImage(path, CanvasPeroro);
                 return;
             }

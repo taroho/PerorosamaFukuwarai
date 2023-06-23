@@ -10,6 +10,12 @@ namespace PerorosamaFukuwarai.PeroroManager
 {
     public class PeroroControllManager
     {
+        /// <summary>
+        ///   型 SolidColorBrushを返します。
+        ///   無効な引数の場合、0,0,0,0になる
+        /// </summary>
+        /// <param name="colorCode">4個の要素を持つstring[]</param>
+        /// <returns></returns>
         public static SolidColorBrush ReturnColorByte(string[] colorCode)
         {
             try
@@ -22,6 +28,7 @@ namespace PerorosamaFukuwarai.PeroroManager
             }
             catch
             {
+
                 return new SolidColorBrush(Color.FromArgb(0x0, 0x0, 0x0, 0x0));
             }
         }
