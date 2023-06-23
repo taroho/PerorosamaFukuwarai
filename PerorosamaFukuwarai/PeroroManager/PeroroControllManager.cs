@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace PerorosamaFukuwarai.PeroroManager
             }
             catch
             {
-                System.Windows.MessageBox.Show("無効な設定");
                 return new SolidColorBrush(Color.FromArgb(0x0, 0x0, 0x0, 0x0));
             }
         }

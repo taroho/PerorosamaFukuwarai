@@ -16,7 +16,7 @@
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock x:Name="TextBackGruond" Text="BackGround"></TextBlock>
+            <TextBlock x:Name="TextBackGruond" Text="BackGroundColor(a,R,B,G)"></TextBlock>
             <TextBlock x:Name="TextAccessaryNum" Text="Accessary Num"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Column="1">
