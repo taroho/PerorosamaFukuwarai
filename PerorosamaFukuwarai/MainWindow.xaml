@@ -8,7 +8,8 @@
         xmlns:view="clr-namespace:PerorosamaFukuwarai.Views"
         mc:Ignorable="d"
         Title="PerorosamaFukuwarai" Height="430" Width="500"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Icon="Resources/peroroIcon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
