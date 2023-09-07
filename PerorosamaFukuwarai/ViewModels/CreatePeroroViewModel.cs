@@ -36,10 +36,7 @@ namespace PerorosamaFukuwarai.ViewModels
         public List<Image> ImagePeroroList = new List<Image>();
 
         public CreatePeroroViewModel()
-        {
-
-           
-        }
+        {    }
 
         public void StartUp()
         {
