@@ -25,7 +25,6 @@ _________________________________
 BackGroundColor(aRBG)=0,0,0,0;
 AccessaryNum=1;
 
-上記の文章をコピペしても治らない場合は僕にはわかりません。
 _________________________________
 
 このソフトウェアはブルーアーカイブ-Blue Archive-の二次創作物です。
@@ -70,7 +69,6 @@ The numerical values may be incorrectly set.
 BackGroundColor(aRBG)=0,0,0,0;
 AccessaryNum=1;
 
-If copying and pasting the above text does not cure the problem, I do not know.
 _________________________________
 
 This software is a derivative work of the Blue Archive - Blue Archive.
